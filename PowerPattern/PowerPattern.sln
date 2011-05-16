@@ -6,12 +6,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		Scenarios.xml = Scenarios.xml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainForm", "MainForm\MainForm.csproj", "{17875C6D-56E1-45C2-91EC-AE8EA5A01099}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 1
+		SccNumberOfProjects = 2
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs25
 		SccLocalPath0 = .
+		SccProjectUniqueName1 = MainForm\\MainForm.csproj
+		SccProjectName1 = MainForm
+		SccLocalPath1 = MainForm
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17875C6D-56E1-45C2-91EC-AE8EA5A01099}.Debug|x86.ActiveCfg = Debug|x86
+		{17875C6D-56E1-45C2-91EC-AE8EA5A01099}.Debug|x86.Build.0 = Debug|x86
+		{17875C6D-56E1-45C2-91EC-AE8EA5A01099}.Release|x86.ActiveCfg = Release|x86
+		{17875C6D-56E1-45C2-91EC-AE8EA5A01099}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

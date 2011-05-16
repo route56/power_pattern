@@ -2,7 +2,10 @@
 <Scenarios>
 	<Scenario>
 		<s>
-			Start the app. It appears in system tray. It says it's up and running.
+			Start the app.
+			<s p="2">
+				It appears in system tray. It says it's up and running.
+			</s>
 		</s>
 		<s>
 			Right click and context menu comes. Menu has 2 options. Open. Exit.
@@ -97,4 +100,5 @@
 			</s>
 		</s>
 	</Scenario>
-</Scenarios>
+</Scenarios
+>
