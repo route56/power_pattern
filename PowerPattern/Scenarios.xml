@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Scenarios>
+	<Scenario>
+		<s>
+			Start the app. It appears in system tray. It says it's up and running.
+		</s>
+		<s>
+			Right click and context menu comes. Menu has 2 options. Open. Exit.
+		</s>
+		<s>
+			Click on open and a win form is launched.
+		</s>
+		<s>
+			The form contains current battery info.
+			The form contains previous battery info in graph form.
+			Export to CVS for more analysis (beta feature only)
+			Predictions
+		</s>
+		<s>
+			The graph contains past battery info data
+			<s>
+				This data consists of time stamp, battery %age, Battery current status (chargin or discharging)
+			</s>
+			<s p="2">
+				Contains CPU history. Ram history, HDD history, Network history. This is to fighre out LOAD pattern
+			</s>
+		</s>
+		<s>
+			Predictions contain
+				Time left to full charge (if charging).
+				Time left to full discharge (if discharging)
+		</s>
+
+		<Rough>
+			system tray app
+			Open -> Dashboard
+			Exit.
+
+			Dashboard
+			Graph
+			%battery life vs time
+			charging
+			discharging
+
+			Interested in
+			rate of charge
+			rate of discharge
+
+			Predicting critical battery time
+			Predicting charge time.
+
+			Account for standby interruptions
+			Log event of standby on
+			Log event of standby resume
+
+			Also note load factor parms
+			CPU usage
+			Mem load
+			HDD activity
+			Wifi/Network
+
+			The app itself is less processor and ram intense. Light weight.
+			Able to export to excel. CSV.
+
+
+
+			Sunday, May 15, 2011 16:15:46 | 85% | Discharging
+			Sunday, May 15, 2011 17:14:35 | 59% | Dis
+
+
+
+
+			Saturday, May 14, 2011 23:40:37 | 21% | Charging
+			Sunday, May 15, 2011 0:36:47 | 28% Charging
+
+			TODO Simple app to track laoptop battery usage overtime graph
+			How fast battery charges back?
+			How fast battery discharges?
+
+			App starts on system tray
+			%userprofile%\Start Menu\Programs\Startup
+			http://www.winxptutor.com/startup.htm
+
+		</Rough>
+	</Scenario>
+	<Scenario p="2">
+		<s>
+			The app is already running.
+		</s>
+		<s>
+			System goes to standby mode
+		</s>
+		<s>
+			App logs this event and will show in some conventient way in graph when it comes back.
+			<s>
+				TBD what convenient way?
+			</s>
+		</s>
+	</Scenario>
+</Scenarios>
