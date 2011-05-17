@@ -100,5 +100,57 @@
 			</s>
 		</s>
 	</Scenario>
+	<Scenario p="1" name="Core Algorithm">
+		<data>
+			<format>
+				store xml serialized/deserialized (binary format?)
+			</format>
+			<structure>
+				two arrays one for charging, other for discharging
+				for each 0 to 100 (both incusive?) we maintain a array of values with timestamp, duration recorded for this level. e.g.
+				<discharge>
+					25 -> 5min 32 sec on Tuesday, May 17, 2011 15:27:09 | 4 min 20 sec on Wednesday, May 18, 2011 15:27:55 | 4 min 10 sec on Thursday, May 19, 2011 15:28:19
+					26 -> {no data} | 5min 10 EXTRAPOLATED_VALUE
+					...
+					50 -> 4min 12 sec on Tuesday, May 17, 2011 16:27:09
+				</discharge>
+				<charge>
+					45 -> 8min 10 sec on Tuesday, May 17, 2011 15:27:09 | 4 min 20 sec on Wednesday, May 18, 2011 15:27:55 | 4 min 10 sec on Thursday, May 19, 2011 15:28:19
+					47 -> {no data} | 5min 10 EXTRAPOLATED_VALUE
+					...
+					50 -> 4min 12 sec on Tuesday, May 17, 2011 16:27:09
+				</charge>
+
+				Also we will be computing following metrices on top of above
+				Average at all level.
+				If no data is present, extrapolate. (regression analysis?) liner? exponential? log?
+				Computing time left is sum of from current level to 100 (charging) or 0 discharging
+				Actual data overrides old extrapolated value.
+				Battery degradation coefficient is calculated by rate at which change is detected over a period of time. revisit this assumption
+
+				Predection per level verification and correction
+				Say avg at level 40 is 5 min
+				But this time actual value was 4 min. Inaccuracy of 1 min detected.
+				And avg at level 41 is 4:50
+				But this time actual value was 5 min. Inaccuracy of -10sec detected.
+					Summing up this value 1+(-10sec) = 50sec
+					Avg inaccuracy = 25sec
+					
+				Algo should strive to reduce this inaccuracy!!!! Revisit this if you can find other patterns to judge algo's inaccuracy?
+				
+
+			</structure>
+			<computing>
+				per level data is computed as following
+					if app started == true, wait for level change
+					when level is entered for 1st time, timestamp is saved. 
+					save this timestamp for beginning of new level and end of old one.
+					when level is exited, save timestamp. this is end of current level and beginning of next one. 
+						(revist if charge is inverted in between... charg should be same... i.e. if in beginning we were discharguing... we should be continue to do so now also... else observation isn't "pure")
+					Once we have a valid data, it is inserted (timespan, starttime, charging state) in existing data structure and things are recalculated.
+						Accordingly UI is updated.
+			</computing>
+		</data>
+	</Scenario>
 </Scenarios
 >
