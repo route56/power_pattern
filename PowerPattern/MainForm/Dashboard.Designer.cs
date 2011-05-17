@@ -45,6 +45,7 @@
 			this.powerStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.standbyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataUnitBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataUnitBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -196,6 +197,11 @@
 			// 
 			this.dataUnitBindingSource.DataSource = typeof(MainForm.DataUnit);
 			// 
+			// backgroundWorker1
+			// 
+			this.backgroundWorker1.WorkerSupportsCancellation = true;
+			this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+			// 
 			// Dashboard
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -238,6 +244,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn powerStatusDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn standbyDataGridViewTextBoxColumn;
 		private System.Windows.Forms.BindingSource dataUnitBindingSource;
+		private System.ComponentModel.BackgroundWorker backgroundWorker1;
 	}
 }
 
