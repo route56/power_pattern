@@ -152,5 +152,40 @@
 			</computing>
 		</data>
 	</Scenario>
-</Scenarios
->
+	<Scenario>
+		It was observer in raw data analysis that discharge takes about 4.36/2 min per level And recharge takes double of this time.
+		One simplified algo can be
+		Don't maintain any large historic data.
+		Have two numbers d discharge running average time, r recharge running average time.
+		time left to recharge fully = r*(1-powerlevel)
+		time left to discharge fully = d*powerlevel
+		
+		pure observation defn:
+		1. Same power state throughout the level.
+		2. Have power level enter time.
+		3. Have power level exit time.
+		4. System didn't went to standby or hibernate 
+			It works
+			
+		
+		compute timespan. average this with running average
+		Running average window = ?? 75? between 100 and 50 or 100??
+
+		Prediction accuracy algo
+			Pure observation lies in (avg - stddev) and (avg + stddev)
+					stddev. really???
+						error margin less than 2 mins overall [ read from config ]
+						2*60/100 = 1.2 sec stddev = .6 
+						remember also we poll for data so might want to consider this fact 
+						above
+				success if above is true
+				failure if not true.
+				success / (success + failure) count [ this is running prediction count] window = 1000?
+				<Asserts>
+					window of moving avg >= number of elements stored
+				</Asserts>
+	</Scenario>
+	<Scenario>
+		The sampling time can be made half of per level time once established.
+	</Scenario>
+</Scenarios>

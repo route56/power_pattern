@@ -1,0 +1,13 @@
+Data,10,7,9,14,27
+Window,5,,,,
+Curr Avg,13.4,,,,
+New element,5,,,,
+New Avg,12.4,,,,
+Comment,full window new element kicks out other one verify new avg and new list,,,,
+,,,,,
+Data,27,74,13,,
+Window,5,,,,
+Curr Avg,38,,,,
+New element,30,,,,
+New Avg,36,,,,
+Comment,space in window new element accomdated inside verify new avg and new list,,,,

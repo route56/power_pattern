@@ -10,5 +10,16 @@ namespace PatternFinder
 	/// </summary>
 	public class Miner
 	{
+		public List<PureObservation> GetPureObservation(List<DataUnit> list)
+		{
+			throw new NotImplementedException();
+		}
+
+		// Add data to gold mine
+
+		public GoldMine AddPureObservationToGoldMine(GoldMine goldMine, PureObservation pureObservation)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
