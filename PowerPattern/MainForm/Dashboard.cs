@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Configuration;
 using PatternFinder;
+using System.Diagnostics;
 
 namespace MainForm
 {
@@ -17,15 +18,25 @@ namespace MainForm
 		public Dashboard()
 		{
 			InitializeComponent();
-			//backgroundWorker1.RunWorkerAsync();
+
+			AddDataUnit(GetDataUnitNow());
+
 			int interval;
 			if(!Int32.TryParse(ConfigurationManager.AppSettings["TimerInterval"], out interval))
 			{
 				interval = 30000; // default
 			}
 
+			GetDebugInterval(ref interval);
+
 			timer1.Interval = interval;
 			timer1.Start();
+		}
+
+		[Conditional("DEBUG")]
+		private void GetDebugInterval(ref int interval)
+		{
+			interval = 1000;//1 sec
 		}
 
 		delegate void AddDataUnitCallback(DataUnit dt);
@@ -33,49 +44,58 @@ namespace MainForm
 		{
 			if (InvokeRequired)
 			{
-				//dataUnitBindingSource.Add(dt);
 				this.Invoke(new AddDataUnitCallback(AddDataUnit), new object[] { dt });
 			}
 			else
 			{
 				dataUnitBindingSource.Add(dt);
+				if (dt.Standby.HasValue == false)
+				{
+					this.progressBar1.Value = (int)(dt.BatteryLifePercent * 100);
+					this.lblBatteryStatusPercent.Text = this.progressBar1.Value.ToString() + "%";
+					this.lblPowerStatus.Text = dt.BatteryChargeStatus ? "Charging" : "Battery";
+					this.lblTimeFullyCharged.Text = GetPredictionToCharge(dt.BatteryLifePercent).ToString();
+					this.lblTimeLeftFullyDischarged.Text = GetPredictionToDischarge(dt.BatteryLifePercent).ToString();
+				}
 			}
 		}
 
-		private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+		private TimeSpan GetPredictionToDischarge(double p)
 		{
-			DataUnit dt = e.Argument as DataUnit;
-			//loadDataFromFile.On
-			for (int i = 0; i < 100; i++)
-			{
-				AddDataUnit(
-					new DataUnit()
-					{
-						BatteryStatus = 100 - i,
-						PowerStatus = i % 2 == 0 ? true : false,
-						TimeStamp = DateTime.Now
-					});
+			// Current it takes five 30secs = 2.5minutes to drop by 1 percent.
+			int minutesLeft = (int)(p * 100 * 2.5);
+			return new TimeSpan(0, minutesLeft,0);
+		}
 
-				Thread.Sleep(100);
-			}
+		private TimeSpan GetPredictionToCharge(double p)
+		{
+			// Current it takes 10 30secs = 5 minutes to get up by 1 percent.
+			int minutesLeft = (int)((100 - p * 100) * 5);
+			return new TimeSpan(0, minutesLeft, 0);
+		}
 
 			// TODOH add another background thread to monitor stuff and updateUI state and add to datagrid
 			// TODOH DECESION this 2nd thread will wait till primary file load thread is done?
 			// TODOH DECESION this 2nd thread will wait till what to write back to file?
 			// TODOH DECESION Sync queue again?
 
-		}
-
 		private void timer1_Tick(object sender, EventArgs e)
 		{
+			DataUnit dt = GetDataUnitNow();
+			dt.Standby = null;
+			AddDataUnit(dt);
+		}
+
+		private DataUnit GetDataUnitNow()
+		{
 			PowerStatus ps = SystemInformation.PowerStatus;
-			AddDataUnit(new DataUnit()
+			DataUnit dt = new DataUnit()
 			{
 				TimeStamp = DateTime.Now,
-				PowerStatus = ps.BatteryChargeStatus == BatteryChargeStatus.Charging ? true : false,
-				BatteryStatus = ps.BatteryLifePercent,
-				Standby = null
-			});
+				BatteryChargeStatus = ps.BatteryChargeStatus == BatteryChargeStatus.Charging ? true : false,
+				BatteryLifePercent = ps.BatteryLifePercent,
+			};
+			return dt;
 		}
 
 		/// <summary>
@@ -89,10 +109,18 @@ namespace MainForm
 				case OSEvents.None:
 					break;
 				case OSEvents.StandbyStarted:
-					AddDataUnit(new DataUnit() { TimeStamp = DateTime.Now, Standby = true });
+					{
+						DataUnit dt = GetDataUnitNow();
+						dt.Standby = true;
+						AddDataUnit(dt);
+					}
 					break;
 				case OSEvents.StandbyEnd:
-					AddDataUnit(new DataUnit() { TimeStamp = DateTime.Now, Standby = false });
+					{
+						DataUnit dt = GetDataUnitNow();
+						dt.Standby = false;
+						AddDataUnit(dt);
+					}
 					break;
 				default:
 					break;

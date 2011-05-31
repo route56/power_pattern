@@ -47,5 +47,20 @@ namespace PatternFinder.Test
 		{
 			throw new NotImplementedException();
 		}
+
+		/// <summary>
+		/// Data driven test.
+		/// </summary>
+		[TestMethod]
+		public void GetPureObservationListFromDatatUnitListWithStandbyInfoIncluded()
+		{
+			// Get data and expectations from GetPureObservationListFromDatatUnitListWithStandbyInfoIncluded.csv file
+			List<Tuple<List<DataUnit>, List<PureObservation>, string>> data = GetDataAndExpectationsFrom("GetPureObservationListFromDatatUnitListWithStandbyInfoIncluded.csv");
+
+			foreach (var item in data)
+			{
+				CollectionAssert.AreEqual(new Miner().GetPureObservation(item.Item1), item.Item2, item.Item3);
+			}
+		}
 	}
 }

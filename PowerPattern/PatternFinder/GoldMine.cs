@@ -14,13 +14,13 @@ namespace PatternFinder
 		/// <summary>
 		/// Computed from RechargeHistory
 		/// </summary>
-		public double RechargeFactor { get; } // TODOH
+		public double RechargeFactor { get; private set; } // TODOH
 
 		public List<double> DischargeHistory { get; set; }
 		/// <summary>
 		/// Computed from DischargeHistory
 		/// </summary>
-		public double DischargeFactor { get; } // TODOH
+		public double DischargeFactor { get; private set; } // TODOH
 
 		/// <summary>
 		/// This is the max size of running average.

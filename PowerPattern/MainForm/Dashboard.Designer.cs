@@ -40,12 +40,11 @@
 			this.lblTimeLeftFullyDischarged = new System.Windows.Forms.Label();
 			this.lblPredictionToDischarge = new System.Windows.Forms.Label();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
-			this.timeStampDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.batteryStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.powerStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.standbyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataUnitBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+			this.timeStampDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.batteryLifePercentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.batteryChargeStatusDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.standbyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataUnitBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -156,8 +155,8 @@
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.timeStampDataGridViewTextBoxColumn,
-            this.batteryStatusDataGridViewTextBoxColumn,
-            this.powerStatusDataGridViewTextBoxColumn,
+            this.batteryLifePercentDataGridViewTextBoxColumn,
+            this.batteryChargeStatusDataGridViewCheckBoxColumn,
             this.standbyDataGridViewTextBoxColumn});
 			this.dataGridView1.DataSource = this.dataUnitBindingSource;
 			this.dataGridView1.Location = new System.Drawing.Point(11, 172);
@@ -166,6 +165,10 @@
 			this.dataGridView1.Size = new System.Drawing.Size(438, 260);
 			this.dataGridView1.TabIndex = 10;
 			// 
+			// dataUnitBindingSource
+			// 
+			this.dataUnitBindingSource.DataSource = typeof(PatternFinder.DataUnit);
+			// 
 			// timeStampDataGridViewTextBoxColumn
 			// 
 			this.timeStampDataGridViewTextBoxColumn.DataPropertyName = "TimeStamp";
@@ -173,19 +176,19 @@
 			this.timeStampDataGridViewTextBoxColumn.Name = "timeStampDataGridViewTextBoxColumn";
 			this.timeStampDataGridViewTextBoxColumn.ReadOnly = true;
 			// 
-			// batteryStatusDataGridViewTextBoxColumn
+			// batteryLifePercentDataGridViewTextBoxColumn
 			// 
-			this.batteryStatusDataGridViewTextBoxColumn.DataPropertyName = "BatteryStatus";
-			this.batteryStatusDataGridViewTextBoxColumn.HeaderText = "BatteryStatus";
-			this.batteryStatusDataGridViewTextBoxColumn.Name = "batteryStatusDataGridViewTextBoxColumn";
-			this.batteryStatusDataGridViewTextBoxColumn.ReadOnly = true;
+			this.batteryLifePercentDataGridViewTextBoxColumn.DataPropertyName = "BatteryLifePercent";
+			this.batteryLifePercentDataGridViewTextBoxColumn.HeaderText = "BatteryLifePercent";
+			this.batteryLifePercentDataGridViewTextBoxColumn.Name = "batteryLifePercentDataGridViewTextBoxColumn";
+			this.batteryLifePercentDataGridViewTextBoxColumn.ReadOnly = true;
 			// 
-			// powerStatusDataGridViewTextBoxColumn
+			// batteryChargeStatusDataGridViewCheckBoxColumn
 			// 
-			this.powerStatusDataGridViewTextBoxColumn.DataPropertyName = "PowerStatus";
-			this.powerStatusDataGridViewTextBoxColumn.HeaderText = "PowerStatus";
-			this.powerStatusDataGridViewTextBoxColumn.Name = "powerStatusDataGridViewTextBoxColumn";
-			this.powerStatusDataGridViewTextBoxColumn.ReadOnly = true;
+			this.batteryChargeStatusDataGridViewCheckBoxColumn.DataPropertyName = "BatteryChargeStatus";
+			this.batteryChargeStatusDataGridViewCheckBoxColumn.HeaderText = "BatteryChargeStatus";
+			this.batteryChargeStatusDataGridViewCheckBoxColumn.Name = "batteryChargeStatusDataGridViewCheckBoxColumn";
+			this.batteryChargeStatusDataGridViewCheckBoxColumn.ReadOnly = true;
 			// 
 			// standbyDataGridViewTextBoxColumn
 			// 
@@ -193,15 +196,6 @@
 			this.standbyDataGridViewTextBoxColumn.HeaderText = "Standby";
 			this.standbyDataGridViewTextBoxColumn.Name = "standbyDataGridViewTextBoxColumn";
 			this.standbyDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// dataUnitBindingSource
-			// 
-			this.dataUnitBindingSource.DataSource = typeof(MainForm.DataUnit);
-			// 
-			// backgroundWorker1
-			// 
-			this.backgroundWorker1.WorkerSupportsCancellation = true;
-			this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
 			// 
 			// Dashboard
 			// 
@@ -240,12 +234,13 @@
 		private System.Windows.Forms.Label lblTimeLeftFullyDischarged;
 		private System.Windows.Forms.Label lblPredictionToDischarge;
 		private System.Windows.Forms.DataGridView dataGridView1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn timeStampDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn batteryStatusDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn powerStatusDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn standbyDataGridViewTextBoxColumn;
 		private System.Windows.Forms.BindingSource dataUnitBindingSource;
-		private System.ComponentModel.BackgroundWorker backgroundWorker1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn timeStampDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn batteryLifePercentDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewCheckBoxColumn batteryChargeStatusDataGridViewCheckBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn standbyDataGridViewTextBoxColumn;
 	}
 }
 

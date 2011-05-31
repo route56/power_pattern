@@ -14,11 +14,11 @@ namespace PatternFinder
 		/// <summary>
 		/// Percent of battery level
 		/// </summary>
-		public double? BatteryStatus { get; set; }
+		public double BatteryLifePercent { get; set; }
 		/// <summary>
 		/// true means charging, false means running on battery
 		/// </summary>
-		public bool? PowerStatus { get; set; }
+		public bool BatteryChargeStatus { get; set; }
 		/// <summary>
 		/// true means standby started, false means standby done
 		/// </summary>

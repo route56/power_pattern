@@ -59,6 +59,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="GetPureObservationListFromDatatUnitListWithStandbyInfoIncluded.csv" />
     <None Include="GetPureObservationListFromDatatUnitList.csv" />
     <None Include="RunningAverageChangesForNewData.csv" />
   </ItemGroup>
